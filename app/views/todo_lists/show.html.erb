@@ -1,24 +1,57 @@
 <div class="card-header d-flex justify-content-between">
   <div>
-    <h5 class='m-0'><b><%= @todo_list.titulo %></b></h5>
-    <p class='text-secondary m-0'><small>100% complete (12/12 Todo Items)</small></p>
+    <h5 class='m-0'>
+      <b><%= @todo_list.titulo %></b>
+      <span class="badge badge-<%= @todo_list.badge_color %>"><%= @todo_list.status %></span>
+    </h5>
+    <p class='text-secondary m-0'><small><%= @todo_list.percent_complete %>% Completo (<%= @todo_list.completed_items %>/<%= @todo_list.total_items %>) Todo Items</small></p>
   </div>
   <div>
     <%= link_to 'Edit', edit_todo_list_path(@todo_list), class: 'btn btn-secondary' %>
   </div>
 </div>
 
-<ul class="list-group">
-  <% @todo_list.todo_items.each do |todo_item| %>
-    <li class="list-group-item">
-      <div class="d-flex justify-content-between">
-        <span>
-          <%= todo_item.descricao %>
-        </span>
-        <%= link_to '#', class: 'btn btn-success' do %>
-          <i class='fas fa-check'></i>
-        <% end %>
-      </div>
-    </li>
+  <div class='card-body'>
+    <div class="progress mb-4">
+      <div class="progress-bar bg-success" role="progressbar" style="width:<%= @todo_list.percent_complete %>%" aria-valuenow="<%= @todo_list.percent_complete %>" aria-valuemin="0" aria-valuemax="100"></div>
+  </div>
+
+  <%= form_for([@todo_list, @todo_item]) do |f| %>
+    <div class="input-group mb-4">
+      <%= f.text_field :descricao, class: 'form-control', placeholder: 'Adicionar Item' %>
+        <div class="input-group-append">
+          <%= f.submit "Add", class: "btn btn-primary input-group-btn" %>
+        </div>
+    </div>
   <% end %>
-</ul>
+
+  <ul class="list-group">
+    <% @todo_list.todo_items.each do |todo_item| %>
+      <% if todo_item.completo? %>
+        <li class="list-group-item bg-light">
+          <div class="d-flex justify-content-between">
+              <span class='text-muted'>
+                <em><s>
+                  <%= todo_item.descricao %>
+                </em></s>
+              </span>
+              <%= link_to '#', class: 'btn btn-success' do %>
+               <i class='fas fa-check'></i>
+            <% end %>
+          </div>
+        </li>
+      <% else %>
+        <li class="list-group-item">
+          <div class="d-flex justify-content-between">
+            <span><%= todo_item.descricao %></span>
+              <%= link_to '#', class: 'btn btn-danger' do %>
+            <i class='fas fa-calendar-times'></i>
+          <% end %>
+        </div>
+          </li>
+      <% end %>
+    <% end %>
+  </ul>
+</div>
+
+  
