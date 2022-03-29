@@ -1,15 +1,23 @@
-
 <div class="card-header d-flex justify-content-between">
   <h5 class="md-0 text-dark">
    Listagem To Do
   </h5>
-  <%= link_to 'Novo Todo', new_todo_list_path, class: 'btn btn-primary btn-sm' %>
+  <!-- <%= link_to 'Novo Todo', new_todo_list_path, class: 'btn btn-primary btn-sm' %> -->
 </div>
-
 <div class="card-body ">
+<div class="m-1">  
+    <%= form_for :todo_list do |f| %>
+      <div class="input-group mb-4">
+        <%= f.text_field :titulo, class: 'form-control', placeholder: 'Titulo Todo List' %>
+        <div class="input-group-append">
+          <%= f.submit "Salvar", class: "btn btn-primary input-group-btn" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
   <div class="row m-1">
     <% @todo_lists.each do |todo_list| %>
-      <div class="col-10">
+      <div class="col-10" style='border:1px solid #f5f5f5; padding:20px 5px 20px 5px'>
         <%= link_to todo_list, class: "text-decoration-none" do %>      
           <h6 class='m-0 text-dark'>
             <b>
@@ -25,11 +33,9 @@
             </small>
           </p>
         <% end %>
-        <hr>
       </div>
-      <div class="col-2" align="center">
+      <div class="col-2" align="center"  style='border:1px solid #f5f5f5; padding:20px 1px 20px 1px'>
         <%= link_to "<button class='btn btn-danger'><i class='fa fa-trash'></i></button>".html_safe, { action: :destroy, id: todo_list.id }, method: :delete, data: { confirm: 'Voce realmente deseja Excluir?'} %>
-        <hr>
       </div> 
     <% end %>
   </div>

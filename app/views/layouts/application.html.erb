@@ -17,7 +17,11 @@
     <div class="container">
       <div class="row">
         <div class="col-md-10 col-lg-8 offset-md-1 offset-lg-2">
-          <p id="notice"><%= notice %></p>
+          <% unless notice.nil? %>
+            <div id="notice" class="alert alert-success" role="alert">
+              <%= notice %>
+            </div>
+          <% end %>
             <div class="card mt-5">
               <%= yield %>
             </div>

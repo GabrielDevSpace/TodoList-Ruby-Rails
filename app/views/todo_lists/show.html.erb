@@ -47,7 +47,11 @@
                 </span>
               </div>
               <div class="col-3" align="right">          
-                <%= link_to "<button class='btn btn-success'><i class='fa fa-check'></i></button>".html_safe, data: {reflex: "click->TodoItem#incompleto", id: todo_item.id } %>
+               
+                <%= link_to '#', class: 'btn btn-success', data: {reflex: "click->TodoItem#marcar_incompleto", id: todo_item.id } do %>
+                <i class="fa fa-check"></i>
+                 <% end %>
+
                 <%= link_to "<button class='btn btn-danger'><i class='fa fa-trash'></i></button>".html_safe, [todo_item.todo_list, todo_item],method: :delete, data: { confirm: 'Voce realmente deseja Excluir?' } %>
               </div>
             </div>  
@@ -64,11 +68,9 @@
               </div>
               <div class="col-3" align="right">          
                 
-        <div data-controller="example">
-  <input type="text" data-reflex-permanent
-    data-reflex="input->ExampleReflex#update_value">
-  <p>The value is: <%= @value %>.</p>
-</div>
+              <%= link_to '#', class: 'btn btn-secondary', data: {reflex: "click->TodoItem#marcar_completo", id: todo_item.id } do %>
+              <i class="fa fa-check"></i>
+              <% end %>
 
                 <%= link_to "<button class='btn btn-danger'><i class='fa fa-trash'></i></button>".html_safe, [todo_item.todo_list, todo_item],method: :delete, data: { confirm: 'Voce realmente deseja Excluir?' } %>
               </div>
