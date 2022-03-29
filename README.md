@@ -1,24 +1,21 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## To-do List with Rails 6 and Stimulus Reflex
+* I put the main information in English for better interaction with the world community.
+* But the code is in pt-br.
 
-Things you may want to cover:
+![image](https://user-images.githubusercontent.com/64210900/160716940-66ebf195-cca6-4423-8c7c-876640c61029.png)
 
-* Ruby version
+**How it works:** 
+* Create several todo lists.
+* For each todo list it is possible to add several items (tasks).
 
-* System dependencies
+### Requirements
+* **Ruby: 2.6.9**
+* **Rails: 6.0.4.2**
+* **DB: Sqlite3**
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Additional
+* **gem 'webpacker', '~> 5.0'**
+* **gem 'nested_scaffold'**
+* **gem "stimulus_reflex", "~> 3.4"**
