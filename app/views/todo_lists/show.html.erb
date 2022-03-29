@@ -1,57 +1,81 @@
-<div class="card-header d-flex justify-content-between">
-  <div>
-    <h5 class='m-0'>
-      <b><%= @todo_list.titulo %></b>
-      <span class="badge badge-<%= @todo_list.badge_color %>"><%= @todo_list.status %></span>
-    </h5>
-    <p class='text-secondary m-0'><small><%= @todo_list.percent_complete %>% Completo (<%= @todo_list.completed_items %>/<%= @todo_list.total_items %>) Todo Items</small></p>
+<div class="card-header">
+  <div class="row">
+    <div class="col-1">
+    <%= link_to todo_lists_path, class: "btn btn-dark" do %>
+      <i class="fa fa-angle-left"></i>
+    <% end %>
+    </div>
+      <div class="col-11">
+        <div class="d-flex justify-content-between">
+          <div>
+            <h6 class='m-0'>
+              <b><%= @todo_list.titulo %></b>
+              <span class="badge badge-<%= @todo_list.badge_color %>"><%= @todo_list.status %></span>
+            </h6>
+            <p class='text-secondary m-0'><small><%= @todo_list.percent_complete %>% Completo (<%= @todo_list.completed_items %>/<%= @todo_list.total_items %>) Todo Items</small></p>
+          </div>
+          <div>
+            <%= link_to 'Editar', edit_todo_list_path(@todo_list), class: 'btn btn-secondary' %>
+          </div>
+          </div>  
+        </div>
+      </div>
   </div>
-  <div>
-    <%= link_to 'Edit', edit_todo_list_path(@todo_list), class: 'btn btn-secondary' %>
-  </div>
-</div>
-
   <div class='card-body'>
     <div class="progress mb-4">
-      <div class="progress-bar bg-success" role="progressbar" style="width:<%= @todo_list.percent_complete %>%" aria-valuenow="<%= @todo_list.percent_complete %>" aria-valuemin="0" aria-valuemax="100"></div>
-  </div>
-
-  <%= form_for([@todo_list, @todo_item]) do |f| %>
-    <div class="input-group mb-4">
-      <%= f.text_field :descricao, class: 'form-control', placeholder: 'Adicionar Item' %>
+      <div class="progress-bar bg-success" role="progressbar" style="width:<%= @todo_list.percent_complete %>%" aria-valuenow="<%= @todo_list.percent_complete %>" aria-valuemin="0" aria-valuemax="100">
+      </div>
+    </div>
+    <%= form_for([@todo_list, @todo_item]) do |f| %>
+      <div class="input-group mb-4">
+        <%= f.text_field :descricao, class: 'form-control', placeholder: 'Adicionar Item' %>
         <div class="input-group-append">
           <%= f.submit "Add", class: "btn btn-primary input-group-btn" %>
         </div>
-    </div>
-  <% end %>
-
-  <ul class="list-group">
-    <% @todo_list.todo_items.each do |todo_item| %>
-      <% if todo_item.completo? %>
-        <li class="list-group-item bg-light">
-          <div class="d-flex justify-content-between">
-              <span class='text-muted'>
-                <em><s>
-                  <%= todo_item.descricao %>
-                </em></s>
-              </span>
-              <%= link_to '#', class: 'btn btn-success' do %>
-               <i class='fas fa-check'></i>
-            <% end %>
-          </div>
-        </li>
-      <% else %>
-        <li class="list-group-item">
-          <div class="d-flex justify-content-between">
-            <span><%= todo_item.descricao %></span>
-              <%= link_to '#', class: 'btn btn-danger' do %>
-            <i class='fas fa-calendar-times'></i>
-          <% end %>
-        </div>
-          </li>
-      <% end %>
+      </div>
     <% end %>
-  </ul>
+    <div class="row m-0">
+      <% @todo_list.todo_items.order(:completo).each do |todo_item| %>
+        <% if todo_item.completo? %>
+          <div class=" col-12 p-2 border bg-light">
+            <div class="row">
+              <div class="col-9">
+                <span class='text-secondary'>
+                  <em><s>
+                    <%= todo_item.descricao %>  
+                  </em></s>
+                </span>
+              </div>
+              <div class="col-3" align="right">          
+                <%= link_to "<button class='btn btn-success'><i class='fa fa-check'></i></button>".html_safe, data: {reflex: "click->TodoItem#incompleto", id: todo_item.id } %>
+                <%= link_to "<button class='btn btn-danger'><i class='fa fa-trash'></i></button>".html_safe, [todo_item.todo_list, todo_item],method: :delete, data: { confirm: 'Voce realmente deseja Excluir?' } %>
+              </div>
+            </div>  
+          </div>
+        <% else %>
+          <div class=" col-12 p-2 border bg-light">
+            <div class="row">
+              <div class="col-9">
+                <span class='text-muted'>
+                  <b>
+                    <%= todo_item.descricao %>  
+                  </b>
+                </span>
+              </div>
+              <div class="col-3" align="right">          
+                
+        <div data-controller="example">
+  <input type="text" data-reflex-permanent
+    data-reflex="input->ExampleReflex#update_value">
+  <p>The value is: <%= @value %>.</p>
 </div>
 
-  
+                <%= link_to "<button class='btn btn-danger'><i class='fa fa-trash'></i></button>".html_safe, [todo_item.todo_list, todo_item],method: :delete, data: { confirm: 'Voce realmente deseja Excluir?' } %>
+              </div>
+            </div>  
+          </div>
+        <% end %>  
+      <% end %>
+    </div> 
+  </div>
+</div> 

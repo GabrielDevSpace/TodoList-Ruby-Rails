@@ -1,5 +1,9 @@
-<h1>New Todo List</h1>
-
+<div class="card-header d-flex justify-content-between">
+  <h5 class="md-0 text-dark">
+    Novo To Do
+  </h5>
+  <a href="<%= todo_lists_path %>" class="btn btn-dark">
+    Voltar
+  </a>
+</div>
 <%= render 'form', todo_list: @todo_list %>
-
-<%= link_to 'Back', todo_lists_path %>

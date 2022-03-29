@@ -1,16 +1,36 @@
+
 <div class="card-header d-flex justify-content-between">
-    <span>
-      Todo Lists
-    </span>
-  <%= link_to 'New Todo List', new_todo_list_path, class: 'btn btn-primary btn-sm' %>
+  <h5 class="md-0 text-dark">
+   Listagem To Do
+  </h5>
+  <%= link_to 'Novo Todo', new_todo_list_path, class: 'btn btn-primary btn-sm' %>
 </div>
 
-<ul class="list-group">
-  <% @todo_lists.each do |todo_list| %>
-    <li class="list-group-item">
-      <%= link_to todo_list.titulo, todo_list %>
-    </li>
-  <% end %>
-</ul>
-
-
+<div class="card-body ">
+  <div class="row m-1">
+    <% @todo_lists.each do |todo_list| %>
+      <div class="col-10">
+        <%= link_to todo_list, class: "text-decoration-none" do %>      
+          <h6 class='m-0 text-dark'>
+            <b>
+              <%= todo_list.titulo %>
+            </b>
+            <span class="badge badge-<%= todo_list.badge_color %>">
+                <%= todo_list.status %>
+            </span>
+          </h6>
+          <p class='text-secondary m-0'>
+            <small>
+              <%= todo_list.percent_complete %>% Completo (<%= todo_list.completed_items %>/<%= todo_list.total_items %>) Todo Items
+            </small>
+          </p>
+        <% end %>
+        <hr>
+      </div>
+      <div class="col-2" align="center">
+        <%= link_to "<button class='btn btn-danger'><i class='fa fa-trash'></i></button>".html_safe, { action: :destroy, id: todo_list.id }, method: :delete, data: { confirm: 'Voce realmente deseja Excluir?'} %>
+        <hr>
+      </div> 
+    <% end %>
+  </div>
+</div>

@@ -11,12 +11,20 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :titulo %>
-    <%= form.text_field :titulo %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-9">
+        <div class="field">
+          <%= form.text_field :titulo, class: 'form-control', placeholder: 'Titulo' %>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="actions">
+        <div class="input-group-append">
+          <%= form.submit "Salvar To Do", class: "btn btn-primary input-group-btn" %>
+        </div>
+        </div>
+      </div>
+    </div>
   </div>
 <% end %>

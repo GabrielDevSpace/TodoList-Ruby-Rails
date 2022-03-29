@@ -1,4 +1,4 @@
-<h1>Listing todo_items</h1>
+<h1>Listagem de Items</h1>
 
 <table>
   <tr>
@@ -17,9 +17,9 @@
     <td><%= todo_item.completo %></td>
     <td><%= todo_item.completo_em %></td>
     <td><%= todo_item.todo_list %></td>
-    <td><%= link_to 'Show', [todo_item.todo_list, todo_item] %></td>
-    <td><%= link_to 'Edit', edit_todo_list_todo_item_path(todo_item.todo_list, todo_item) %></td>
-    <td><%= link_to 'Destroy', [todo_item.todo_list, todo_item], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Mostrar', [todo_item.todo_list, todo_item] %></td>
+    <td><%= link_to 'Editar', edit_todo_list_todo_item_path(todo_item.todo_list, todo_item) %></td>
+    <td><%= link_to 'Excluir', [todo_item.todo_list, todo_item], method: :delete, data: { confirm: 'Voce tem certeza?' } %></td>
   </tr>
 <% end %>
 </table>
