@@ -19,3 +19,7 @@
 * **gem 'webpacker', '~> 5.0'**
 * **gem 'nested_scaffold'**
 * **gem "stimulus_reflex", "~> 3.4"**
+
+### Overview
+https://user-images.githubusercontent.com/64210900/160718520-6801bb9e-aa3e-4dde-a9fb-0a20994fb987.mp4
+
